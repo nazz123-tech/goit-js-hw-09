@@ -7,9 +7,12 @@ let formData = {
 };
 
 const savedData = JSON.parse(localStorage.getItem(localStorageKey)) ?? {};
+
 form.elements.email.value = savedData.email ?? "";
 form.elements.message.value = savedData.message ?? "";
 
+formData.email=form.elements.email.value;
+formData.message=form.elements.message.value;
 
 form.addEventListener("input", (e) => {
   formData[e.target.name] = e.target.value.trim();
@@ -30,9 +33,11 @@ function handleSubmit(event) {
     return;
   }
 
-  const formData = { email, message };
   console.log(formData);
 
   localStorage.removeItem(localStorageKey);
   form.reset();
+
+  formData.email = "";
+  formData.message = "";
 }
